@@ -40,7 +40,7 @@ class User(UserMixin, db.Model):
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
     tasks = db.relationship('Task', backref='category', lazy=True)
 
 class Task(db.Model):
@@ -210,6 +210,49 @@ def profile():
             flash('Invalid file type. Please use PNG, JPG, JPEG, or GIF.')
             
     return render_template('profile.html')
+
+@app.route('/edit_task/<int:task_id>', methods=['GET', 'POST'])
+@login_required
+def edit_task(task_id):
+    task = Task.query.get_or_404(task_id)
+    if task.user_id != current_user.id:
+        flash('You do not have permission to edit this task.')
+        return redirect(url_for('index'))
+    
+    if request.method == 'POST':
+        title = request.form.get('title')
+        description = request.form.get('description')
+        category_id = request.form.get('category_id')
+        
+        if not title:
+            flash('Title is required!')
+            return redirect(url_for('index'))
+        
+        task.title = title
+        task.description = description
+        if category_id:
+            category = Category.query.get(category_id)
+            if category:
+                task.category_id = category_id
+        
+        db.session.commit()
+        flash('Task updated successfully!')
+        return redirect(url_for('index'))
+    
+    return redirect(url_for('index'))
+
+@app.route('/delete_task/<int:task_id>', methods=['GET', 'POST'])
+@login_required
+def delete_task(task_id):
+    task = Task.query.get_or_404(task_id)
+    if task.user_id != current_user.id:
+        flash('You do not have permission to delete this task.')
+        return redirect(url_for('index'))
+    
+    db.session.delete(task)
+    db.session.commit()
+    flash('Task deleted successfully!')
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     with app.app_context():

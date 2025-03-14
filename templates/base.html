@@ -254,6 +254,95 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--secondary-color);
         }
+
+        /* Add these styles to your existing CSS */
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+            transition: all 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+            border-radius: 0.5rem;
+        }
+
+        .modal {
+            z-index: 1050;
+        }
+
+        .modal-backdrop {
+            z-index: 1040;
+        }
+
+        /* Add these to your existing styles */
+        body.modal-open {
+            overflow: hidden;
+            padding-right: 0 !important;
+        }
+
+        .modal {
+            padding-right: 0 !important;
+        }
+
+        .modal-dialog {
+            margin: 1.75rem auto;
+            max-width: 500px;
+        }
+
+        .modal-content {
+            border: none;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+        }
+
+        .task-card {
+            position: relative;
+            z-index: 1;
+        }
+
+        .modal {
+            z-index: 1050;
+        }
+
+        .btn-group {
+            z-index: 2;
+        }
+
+        /* Add these new styles */
+        .btn-xs {
+            padding: 0.25rem;
+            font-size: 0.75rem;
+            line-height: 1;
+            border-radius: 0.25rem;
+        }
+
+        .btn-icon-only {
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-icon-only i {
+            font-size: 0.75rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Update existing button styles */
+        .action-buttons .btn:hover {
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 <body>
