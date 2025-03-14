@@ -2,16 +2,17 @@
 
 ## Thông tin cá nhân  
 Họ và tên: Lê Hà Tú My  
+
 Mã số sinh viên : 22648801  
 --------------------
-- Dự án: PTUD-GK-DE-2
-- Mô tả: Một hệ thống quản lý tác vụ với vai trò người dùng và quản trị viên
+- Dự án: Web quản lý công việc (Tasks)
+- Mô tả: Một hệ thống quản lý công việc với vai trò người dùng và quản trị viên
 
 ## Mô tả dự án
 Đây là một hệ thống quản lý tác vụ dựa trên Flask cho phép người dùng:
-- Quản lý nhiệm vụ với tính năng theo dõi trạng thái
+- Quản lý công việc của mình (Công việc đã hoàn thành, chưa hoàn thành)
 - Tải lên hình đại diện
-- Phân loại nhiệm vụ
+- Phân loại công việc
 - Theo dõi thời gian tạo và hoàn thành
 - Hỗ trợ hai vai trò người dùng (quản trị viên và người dùng thông thường)
 
