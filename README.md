@@ -1,8 +1,8 @@
 # Task Management System
 
-## Thông tin cá nhân
-Họ và tên: Lê Hà Tú My
-Mã số sinh viên : 22648801
+## Thông tin cá nhân  
+Họ và tên: Lê Hà Tú My  
+Mã số sinh viên : 22648801  
 --------------------
 - Dự án: PTUD-GK-DE-2
 - Mô tả: Một hệ thống quản lý tác vụ với vai trò người dùng và quản trị viên
@@ -35,6 +35,8 @@ cd ptud-gk-de-2
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
+Hoặc run file ***install.bat***
+
 
 3. Install dependencies:
 ```bash
