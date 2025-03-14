@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Profile Settings</h3>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-4 text-center">
+                        <div class="position-relative d-inline-block">
+                            <img src="{{ current_user.avatar }}" alt="Current Avatar" 
+                                class="img-fluid rounded-circle mb-3 border border-primary" 
+                                style="width: 150px; height: 150px; object-fit: cover;">
+                            <div class="position-absolute bottom-0 end-0">
+                                <label for="avatar" class="btn btn-sm btn-primary rounded-circle" 
+                                    style="width: 32px; height: 32px; padding: 0; line-height: 32px;">
+                                    <i class="fas fa-camera"></i>
+                                </label>
+                            </div>
+                        </div>
+                        <h5 class="text-primary">{{ current_user.username }}</h5>
+                        <p class="text-muted">{% if current_user.is_admin %}Administrator{% else %}User{% endif %}</p>
+                    </div>
+                    <div class="col-md-8">
+                        <form method="POST" enctype="multipart/form-data" id="avatarForm" class="mb-4">
+                            <div class="mb-3">
+                                <input type="file" class="form-control d-none" id="avatar" name="avatar" 
+                                    accept="image/png,image/jpeg,image/jpg,image/gif" onchange="submitForm()">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i>
+                                    Click the camera icon to change your avatar photo.<br>
+                                    Supported formats: PNG, JPG, JPEG, GIF (Max size: 16MB)
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Account Information</h5>
+                                <div class="mb-2">
+                                    <label class="text-muted">Username</label>
+                                    <p class="mb-1">{{ current_user.username }}</p>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="text-muted">Role</label>
+                                    <p class="mb-1">{% if current_user.is_admin %}Administrator{% else %}Regular User{% endif %}</p>
+                                </div>
+                                <div class="mb-0">
+                                    <label class="text-muted">Account Status</label>
+                                    <p class="mb-0"><span class="badge bg-success">Active</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Task Statistics</h5>
+                                <div class="row text-center">
+                                    <div class="col-md-4">
+                                        <div class="p-3">
+                                            <h3 class="text-primary mb-1">{{ current_user.tasks|length }}</h3>
+                                            <p class="text-muted mb-0">Total Tasks</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="p-3">
+                                            <h3 class="text-success mb-1">
+                                                {{ current_user.tasks|selectattr('status', 'equalto', 'completed')|list|length }}
+                                            </h3>
+                                            <p class="text-muted mb-0">Completed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="p-3">
+                                            <h3 class="text-warning mb-1">
+                                                {{ current_user.tasks|selectattr('status', 'equalto', 'pending')|list|length }}
+                                            </h3>
+                                            <p class="text-muted mb-0">Pending</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function submitForm() {
+    document.getElementById('avatarForm').submit();
+}
+</script>
+{% endblock %} 

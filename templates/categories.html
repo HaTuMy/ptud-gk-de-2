@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h2 class="d-flex align-items-center">
+            <i class="fas fa-folder-tree me-2 text-primary"></i>
+            Task Categories
+        </h2>
+    </div>
+    <div class="col-md-4 text-end">
+        <button type="button" class="btn btn-primary btn-icon" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+            <i class="fas fa-plus"></i>
+            <span>Add Category</span>
+        </button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header d-flex align-items-center">
+                <i class="fas fa-list text-primary me-2"></i>
+                <h5>All Categories</h5>
+            </div>
+            <div class="card-body">
+                {% if categories %}
+                <div class="list-group">
+                    {% for category in categories %}
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-1 d-flex align-items-center">
+                                    <i class="fas fa-folder me-2 text-primary"></i>
+                                    {{ category.name }}
+                                </h5>
+                                <small class="text-muted d-flex align-items-center">
+                                    <i class="fas fa-tasks me-1"></i>
+                                    Tasks: {{ category.tasks|length }}
+                                </small>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-primary rounded-pill d-flex align-items-center">
+                                    <i class="fas fa-list-check me-1"></i>
+                                    {{ category.tasks|length }} Tasks
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">No Categories Yet</h5>
+                    <p class="text-muted mb-3">Click the "Add Category" button to create your first category.</p>
+                    <button type="button" class="btn btn-primary btn-icon" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                        <i class="fas fa-plus"></i>
+                        <span>Add Category</span>
+                    </button>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header d-flex align-items-center">
+                <i class="fas fa-chart-pie text-info me-2"></i>
+                <h5>Category Statistics</h5>
+            </div>
+            <div class="card-body">
+                <div class="stat-card mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h6 class="mb-0">Total Categories</h6>
+                            <h3 class="mb-0">{{ categories|length }}</h3>
+                        </div>
+                        <i class="fas fa-folder-tree stat-icon"></i>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-white" role="progressbar" style="width: 100%"></div>
+                    </div>
+                </div>
+
+                {% if categories %}
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fas fa-star text-warning me-2"></i>
+                                <span>Most Used Category</span>
+                            </div>
+                        </div>
+                        {% set most_used = categories|sort(attribute='tasks|length', reverse=true)|first %}
+                        <div class="mt-2">
+                            <h6 class="mb-1 d-flex align-items-center">
+                                <i class="fas fa-folder me-2 text-primary"></i>
+                                {{ most_used.name }}
+                            </h6>
+                            <small class="text-muted d-flex align-items-center">
+                                <i class="fas fa-tasks me-1"></i>
+                                {{ most_used.tasks|length }} tasks
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Category Modal -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title d-flex align-items-center">
+                    <i class="fas fa-folder-plus text-primary me-2"></i>
+                    Add New Category
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url_for('manage_categories') }}" method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label d-flex align-items-center">
+                            <i class="fas fa-tag me-1"></i>
+                            Category Name <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                        <div class="form-text">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Give your category a descriptive name to help organize tasks.
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-secondary btn-icon" data-bs-dismiss="modal">
+                            <i class="fas fa-times"></i>
+                            <span>Close</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-icon">
+                            <i class="fas fa-plus"></i>
+                            <span>Add Category</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
