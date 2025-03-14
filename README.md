@@ -29,13 +29,16 @@ Mã số sinh viên : 22648801
 git clone https://github.com/HaTuMy/ptud-gk-de-2.git
 cd ptud-gk-de-2
 ```
+Cách 1: 
+run file ***install.bat*** 
 
+
+Cách 2: Chạy lệnh sau  
 2. Create a virtual environment:
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-Hoặc run file ***install.bat***
+
 
 
 3. Install dependencies:
