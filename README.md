@@ -2,9 +2,9 @@
 
 ## Thông tin cá nhân  
 
-Họ và tên: Lê Hà Tú My  
+**Họ và tên:** Lê Hà Tú My  
+**Mã số sinh viên :** 22648801  
 
-Mã số sinh viên : 22648801  
 --------------------
 - Dự án: Web quản lý công việc (Tasks)
 - Mô tả: Một hệ thống quản lý công việc với vai trò người dùng và quản trị viên
